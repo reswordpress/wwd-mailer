@@ -41,6 +41,14 @@ class Wwd_Mailer_Admin {
 	private $version;
 
 	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $required_cap;
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -51,6 +59,7 @@ class Wwd_Mailer_Admin {
 
 		$this->wwd_mailer = $wwd_mailer;
 		$this->version = $version;
+		$this->required_cap = 'manage_options';
 
 	}
 
@@ -99,5 +108,69 @@ class Wwd_Mailer_Admin {
 		wp_enqueue_script( $this->wwd_mailer, plugin_dir_url( __FILE__ ) . 'js/wwd-mailer-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+
+
+	/**
+	 * Register the setting pages and their menu items
+	 */
+	public function build_menu() {
+		
+		$menu_items = array(
+			'general' => array(
+				'title' => __( 'MailChimp API Settings', 'mailchimp-for-wp' ),
+				'text' => __( 'MailChimp', 'mailchimp-for-wp' ),
+				'slug' => '',
+				'callback' => array( $this, 'show_generals_setting_page' ),
+				'position' => 0
+			),
+			'other' => array(
+				'title' => __( 'Other Settings', 'mailchimp-for-wp' ),
+				'text' => __( 'Other', 'mailchimp-for-wp' ),
+				'slug' => 'other',
+				'callback' => array( $this, 'show_other_setting_page' ),
+				'position' => 90
+			)
+		);
+
+		/**
+		 * Filters the menu items to appear under the main menu item.
+		 *
+		 * To add your own item, add an associative array in the following format.
+		 *
+		 * $menu_items[] = array(
+		 *     'title' => 'Page title',
+		 *     'text'  => 'Menu text',
+		 *     'slug' => 'Page slug',
+		 *     'callback' => 'my_page_function',
+		 *     'position' => 50
+		 * );
+		 *
+		 * @param array $menu_items
+		 * @since 1.0
+		 */
+		//$menu_items = (array) apply_filters( 'mc4wp_admin_menu_items', $menu_items );
+
+		// add top menu item
+		add_menu_page( 'WWD Mailer', 'WWD Mailer', $this->required_cap, 'wwd_mailer', array( $this, 'load_main_page' ), 'dashicons-email', '99.68491' );
+
+		// sort submenu items by 'position'
+		//uasort( $menu_items, array( $this, 'sort_menu_items_by_position' ) );
+
+		// add sub-menu items
+		//array_walk( $menu_items, array( $this, 'add_menu_item' ) );
+	}
+
+	/**
+	 * Load main page admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function load_main_page() {
+
+		include( plugin_dir_path( __FILE__ ) . 'partials/wwd-mailer-admin-display.php' );
+
+	}
+
+
 
 }

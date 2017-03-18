@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Mailer to all WordPress Users
  * Plugin URI:        http://wilburblog.co.uk/wwdmailer
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Send bulk email to your WordPress users. It's displayed in the WordPress admin area.
  * Version:           1.0.0
  * Author:            William Honeywill
  * Author URI:        http://wilburblog.co.uk/
