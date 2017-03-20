@@ -1,4 +1,1100 @@
-/**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
+#wwd-admin .cm-em,
+#wwd-admin .help,
+.wwd-admin .cm-em,
+.wwd-admin .help {
+    font-style: italic
+}
+
+#wwd-admin .row,
+.wwd-admin .row {
+    margin-left: -20px;
+    margin-right: -20px;
+    float: none
+}
+
+#wwd-admin .row .col,
+.wwd-admin .row .col {
+    padding: 0 20px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+#wwd-admin .row .col-1,
+.wwd-admin .row .col-1 {
+    width: 16.666%
+}
+
+#wwd-admin .row .col-2,
+.wwd-admin .row .col-2 {
+    width: 33.333%
+}
+
+#wwd-admin .row .col-3,
+.wwd-admin .row .col-3 {
+    width: 50%
+}
+
+#wwd-admin .row .col-4,
+.wwd-admin .row .col-4 {
+    width: 66.666%
+}
+
+#wwd-admin .row .col-5,
+.wwd-admin .row .col-5 {
+    width: 83.333%
+}
+
+#wwd-admin .row .col-6,
+.wwd-admin .row .col-6 {
+    width: 100%
+}
+
+#wwd-admin .clearfix:after,
+#wwd-admin .clearfix:before,
+#wwd-admin .row:after,
+#wwd-admin .row:before,
+.wwd-admin .clearfix:after,
+.wwd-admin .clearfix:before,
+.wwd-admin .row:after,
+.wwd-admin .row:before {
+    content: " ";
+    display: table
+}
+
+#wwd-admin .clearfix:after,
+#wwd-admin .row:after,
+.wwd-admin .clearfix:after,
+.wwd-admin .row:after {
+    clear: both
+}
+
+@media (max-width:1200px) {
+    #wwd-admin .row .col,
+    .wwd-admin .row .col {
+        width: 100%;
+        float: none;
+        margin: 10px 0
+    }
+}
+
+#wwd-admin .status,
+.wwd-admin .status {
+    display: inline-block;
+    margin-left: 1em;
+    padding: 3px 6px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700
+}
+
+#wwd-admin .status.positive,
+.wwd-admin .status.positive {
+    background-color: #32cd32
+}
+
+#wwd-admin .status.negative,
+.wwd-admin .status.negative {
+    background-color: red
+}
+
+#wwd-admin .status.neutral,
+.wwd-admin .status.neutral {
+    background: gray
+}
+
+#wwd-admin .valigntop,
+.wwd-admin .valigntop {
+    vertical-align: top!important
+}
+
+#wwd-admin .big-margin,
+.wwd-admin .big-margin {
+    margin-top: 60px;
+    margin-bottom: 60px
+}
+
+#wwd-admin .medium-margin,
+.wwd-admin .medium-margin {
+    margin-top: 40px;
+    margin-bottom: 40px
+}
+
+#wwd-admin .small-margin,
+.wwd-admin .small-margin {
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+#wwd-admin .tiny-margin,
+.wwd-admin .tiny-margin {
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+#wwd-admin .hover-activated,
+.wwd-admin .hover-activated {
+    opacity: .5
+}
+
+#wwd-admin .hover-activated:hover,
+.wwd-admin .hover-activated:hover {
+    cursor: pointer;
+    opacity: 1
+}
+
+#wwd-admin .help-text,
+.wwd-admin .help-text {
+    font-size: 14px
+}
+
+#wwd-admin .help-text p,
+.wwd-admin .help-text p {
+    margin: 10px 0;
+    font-size: 14px
+}
+
+#wwd-admin .help-text ul,
+.wwd-admin .help-text ul {
+    list-style: square;
+    margin-top: 15px;
+    padding-left: 40px
+}
+
+#wwd-admin .muted,
+.wwd-admin .muted {
+    color: #aaa
+}
+
+#wwd-admin .red,
+.wwd-admin .red {
+    color: red
+}
+
+#wwd-admin .green,
+.wwd-admin .green {
+    color: #32cd32
+}
+
+#wwd-admin .wwd-notice,
+.wwd-admin .wwd-notice {
+    padding: 6px 12px;
+    color: #31708f;
+    background: #d9edf7;
+    border: 1px solid #bce8f1;
+    margin: 1em 0!important
+}
+
+#wwd-admin .wwd-is-dismissible,
+.wwd-admin .wwd-is-dismissible {
+    padding-right: 38px;
+    position: relative
+}
+
+#wwd-admin .column-ID,
+.wwd-admin .column-ID {
+    width: 10%
+}
+
+#wwd-admin .block,
+.wwd-admin .block {
+    display: block
+}
+
+#wwd-admin .code-sample,
+.wwd-admin .code-sample {
+    font-family: Consolas, Monaco, Lucida Console, monospace;
+    font-size: 12px;
+    background: #fff
+}
+
+#wwd-admin .breadcrumbs,
+.wwd-admin .breadcrumbs {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1em
+}
+
+#wwd-admin .wwd-loader,
+.wwd-admin .wwd-loader {
+    position: relative;
+    display: inline-block;
+    text-indent: -9999999px;
+    border: 3px solid rgba(0, 0, 0, .2);
+    border-left-color: #000;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+    overflow: hidden;
+    border-radius: 50%;
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+#wwd-admin .tab,
+.wwd-admin .tab {
+    display: none;
+    background: inherit;
+    border: none;
+    font-weight: initial
+}
+
+#wwd-admin .tab.tab-active,
+.wwd-admin .tab.tab-active {
+    display: block
+}
+
+#wwd-admin .tab h2,
+.wwd-admin .tab h2 {
+    margin-top: 20px
+}
+
+#wwd-admin .CodeMirror,
+.wwd-admin .CodeMirror {
+    font-family: monospace;
+    height: 300px;
+    color: #000
+}
+
+#wwd-admin .CodeMirror-lines,
+.wwd-admin .CodeMirror-lines {
+    padding: 4px 0
+}
+
+#wwd-admin .CodeMirror pre,
+.wwd-admin .CodeMirror pre {
+    padding: 0 4px
+}
+
+#wwd-admin .CodeMirror-gutter-filler,
+#wwd-admin .CodeMirror-scrollbar-filler,
+.wwd-admin .CodeMirror-gutter-filler,
+.wwd-admin .CodeMirror-scrollbar-filler {
+    background-color: #fff
+}
+
+#wwd-admin .CodeMirror-gutters,
+.wwd-admin .CodeMirror-gutters {
+    border-right: 1px solid #ddd;
+    background-color: #f7f7f7;
+    white-space: nowrap
+}
+
+#wwd-admin .CodeMirror-linenumber,
+.wwd-admin .CodeMirror-linenumber {
+    padding: 0 3px 0 5px;
+    min-width: 20px;
+    text-align: right;
+    color: #999;
+    white-space: nowrap
+}
+
+#wwd-admin .CodeMirror-guttermarker,
+.wwd-admin .CodeMirror-guttermarker {
+    color: #000
+}
+
+#wwd-admin .CodeMirror-guttermarker-subtle,
+.wwd-admin .CodeMirror-guttermarker-subtle {
+    color: #999
+}
+
+#wwd-admin .CodeMirror-cursor,
+.wwd-admin .CodeMirror-cursor {
+    border-left: 1px solid #000;
+    border-right: none;
+    width: 0
+}
+
+#wwd-admin .CodeMirror div.CodeMirror-secondarycursor,
+.wwd-admin .CodeMirror div.CodeMirror-secondarycursor {
+    border-left: 1px solid silver
+}
+
+#wwd-admin .cm-fat-cursor .CodeMirror-cursor,
+.wwd-admin .cm-fat-cursor .CodeMirror-cursor {
+    width: auto;
+    border: 0;
+    background: #7e7
+}
+
+#wwd-admin .cm-fat-cursor div.CodeMirror-cursors,
+.wwd-admin .cm-fat-cursor div.CodeMirror-cursors {
+    z-index: 1
+}
+
+#wwd-admin .cm-animate-fat-cursor,
+.wwd-admin .cm-animate-fat-cursor {
+    width: auto;
+    border: 0;
+    -webkit-animation: blink 1.06s steps(1) infinite;
+    -moz-animation: blink 1.06s steps(1) infinite;
+    animation: blink 1.06s steps(1) infinite;
+    background-color: #7e7
+}
+
+#wwd-admin .field-wizard td.stretch,
+.wwd-admin .field-wizard td.stretch,
+.overlay {
+    width: 100%
+}
+
+@-moz-keyframes blink {
+    50% {
+        background-color: transparent
+    }
+}
+
+@-webkit-keyframes blink {
+    50% {
+        background-color: transparent
+    }
+}
+
+@keyframes blink {
+    50% {
+        background-color: transparent
+    }
+}
+
+#wwd-admin .cm-tab,
+.wwd-admin .cm-tab {
+    display: inline-block;
+    text-decoration: inherit
+}
+
+#wwd-admin .CodeMirror-ruler,
+.wwd-admin .CodeMirror-ruler {
+    border-left: 1px solid #ccc;
+    position: absolute
+}
+
+#wwd-admin .cm-s-default .cm-header,
+.wwd-admin .cm-s-default .cm-header {
+    color: #00f
+}
+
+#wwd-admin .cm-s-default .cm-quote,
+.wwd-admin .cm-s-default .cm-quote {
+    color: #090
+}
+
+#wwd-admin .cm-negative,
+.wwd-admin .cm-negative {
+    color: #d44
+}
+
+#wwd-admin .cm-positive,
+.wwd-admin .cm-positive {
+    color: #292
+}
+
+#wwd-admin .cm-header,
+#wwd-admin .cm-strong,
+.wwd-admin .cm-header,
+.wwd-admin .cm-strong {
+    font-weight: 700
+}
+
+#wwd-admin .cm-link,
+.wwd-admin .cm-link {
+    text-decoration: underline
+}
+
+#wwd-admin .cm-strikethrough,
+.wwd-admin .cm-strikethrough {
+    text-decoration: line-through
+}
+
+#wwd-admin .cm-s-default .cm-keyword,
+.wwd-admin .cm-s-default .cm-keyword {
+    color: #708
+}
+
+#wwd-admin .cm-s-default .cm-atom,
+.wwd-admin .cm-s-default .cm-atom {
+    color: #219
+}
+
+#wwd-admin .cm-s-default .cm-number,
+.wwd-admin .cm-s-default .cm-number {
+    color: #164
+}
+
+#wwd-admin .cm-s-default .cm-def,
+.wwd-admin .cm-s-default .cm-def {
+    color: #00f
+}
+
+#wwd-admin .cm-s-default .cm-variable-2,
+.wwd-admin .cm-s-default .cm-variable-2 {
+    color: #05a
+}
+
+#wwd-admin .cm-s-default .cm-variable-3,
+.wwd-admin .cm-s-default .cm-variable-3 {
+    color: #085
+}
+
+#wwd-admin .cm-s-default .cm-comment,
+.wwd-admin .cm-s-default .cm-comment {
+    color: #a50
+}
+
+#wwd-admin .cm-s-default .cm-string,
+.wwd-admin .cm-s-default .cm-string {
+    color: #a11
+}
+
+#wwd-admin .cm-s-default .cm-string-2,
+.wwd-admin .cm-s-default .cm-string-2 {
+    color: #f50
+}
+
+#wwd-admin .cm-s-default .cm-meta,
+#wwd-admin .cm-s-default .cm-qualifier,
+.wwd-admin .cm-s-default .cm-meta,
+.wwd-admin .cm-s-default .cm-qualifier {
+    color: #555
+}
+
+#wwd-admin .cm-s-default .cm-builtin,
+.wwd-admin .cm-s-default .cm-builtin {
+    color: #30a
+}
+
+#wwd-admin .cm-s-default .cm-bracket,
+.wwd-admin .cm-s-default .cm-bracket {
+    color: #997
+}
+
+#wwd-admin .cm-s-default .cm-tag,
+.wwd-admin .cm-s-default .cm-tag {
+    color: #170
+}
+
+#wwd-admin .cm-s-default .cm-attribute,
+.wwd-admin .cm-s-default .cm-attribute {
+    color: #00c
+}
+
+#wwd-admin .cm-s-default .cm-hr,
+.wwd-admin .cm-s-default .cm-hr {
+    color: #999
+}
+
+#wwd-admin .cm-s-default .cm-link,
+.wwd-admin .cm-s-default .cm-link {
+    color: #00c
+}
+
+#wwd-admin .cm-invalidchar,
+#wwd-admin .cm-s-default .cm-error,
+.wwd-admin .cm-invalidchar,
+.wwd-admin .cm-s-default .cm-error {
+    color: red
+}
+
+#wwd-admin .CodeMirror-composing,
+.wwd-admin .CodeMirror-composing {
+    border-bottom: 2px solid
+}
+
+#wwd-admin div.CodeMirror span.CodeMirror-matchingbracket,
+.wwd-admin div.CodeMirror span.CodeMirror-matchingbracket {
+    color: #0f0
+}
+
+#wwd-admin div.CodeMirror span.CodeMirror-nonmatchingbracket,
+.wwd-admin div.CodeMirror span.CodeMirror-nonmatchingbracket {
+    color: #f22
+}
+
+#wwd-admin .CodeMirror-matchingtag,
+.wwd-admin .CodeMirror-matchingtag {
+    background: rgba(255, 150, 0, .3)
+}
+
+#wwd-admin .CodeMirror-activeline-background,
+.wwd-admin .CodeMirror-activeline-background {
+    background: #e8f2ff
+}
+
+#wwd-admin .CodeMirror,
+.wwd-admin .CodeMirror {
+    position: relative;
+    overflow: hidden;
+    background: #fff
+}
+
+#wwd-admin .CodeMirror-scroll,
+.wwd-admin .CodeMirror-scroll {
+    overflow: scroll!important;
+    margin-bottom: -30px;
+    margin-right: -30px;
+    padding-bottom: 30px;
+    height: 100%;
+    outline: 0;
+    position: relative
+}
+
+#wwd-admin .CodeMirror-sizer,
+.wwd-admin .CodeMirror-sizer {
+    position: relative;
+    border-right: 30px solid transparent
+}
+
+#wwd-admin .CodeMirror-gutter-filler,
+#wwd-admin .CodeMirror-hscrollbar,
+#wwd-admin .CodeMirror-scrollbar-filler,
+#wwd-admin .CodeMirror-vscrollbar,
+.wwd-admin .CodeMirror-gutter-filler,
+.wwd-admin .CodeMirror-hscrollbar,
+.wwd-admin .CodeMirror-scrollbar-filler,
+.wwd-admin .CodeMirror-vscrollbar {
+    position: absolute;
+    z-index: 6;
+    display: none
+}
+
+#wwd-admin .CodeMirror-vscrollbar,
+.wwd-admin .CodeMirror-vscrollbar {
+    right: 0;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: scroll
+}
+
+#wwd-admin .CodeMirror-hscrollbar,
+.wwd-admin .CodeMirror-hscrollbar {
+    bottom: 0;
+    left: 0;
+    overflow-y: hidden;
+    overflow-x: scroll
+}
+
+#wwd-admin .CodeMirror-scrollbar-filler,
+.wwd-admin .CodeMirror-scrollbar-filler {
+    right: 0;
+    bottom: 0
+}
+
+#wwd-admin .CodeMirror-gutter-filler,
+.wwd-admin .CodeMirror-gutter-filler {
+    left: 0;
+    bottom: 0
+}
+
+#wwd-admin .CodeMirror-gutters,
+.wwd-admin .CodeMirror-gutters {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3
+}
+
+#wwd-admin .CodeMirror-gutter,
+.wwd-admin .CodeMirror-gutter {
+    white-space: normal;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: -30px
+}
+
+#wwd-admin .field-wizard .dashicons,
+#wwd-admin .field-wizard td,
+#wwd-admin .field-wizard tr,
+.wwd-admin .field-wizard .dashicons,
+.wwd-admin .field-wizard td,
+.wwd-admin .field-wizard tr {
+    vertical-align: middle
+}
+
+#wwd-admin .CodeMirror-gutter-wrapper,
+.wwd-admin .CodeMirror-gutter-wrapper {
+    position: absolute;
+    z-index: 4;
+    background: 0 0!important;
+    border: none!important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+#wwd-admin .CodeMirror-gutter-background,
+.wwd-admin .CodeMirror-gutter-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 4
+}
+
+#wwd-admin .CodeMirror-gutter-elt,
+.wwd-admin .CodeMirror-gutter-elt {
+    position: absolute;
+    cursor: default;
+    z-index: 4
+}
+
+#wwd-admin .CodeMirror-lines,
+.wwd-admin .CodeMirror-lines {
+    cursor: text;
+    min-height: 1px
+}
+
+#wwd-admin .CodeMirror pre,
+.wwd-admin .CodeMirror pre {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border-width: 0;
+    background: 0 0;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    white-space: pre;
+    word-wrap: normal;
+    line-height: inherit;
+    color: inherit;
+    z-index: 2;
+    position: relative;
+    overflow: visible;
+    -webkit-tap-highlight-color: transparent
+}
+
+#wwd-admin .CodeMirror-wrap pre,
+.wwd-admin .CodeMirror-wrap pre {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: normal
+}
+
+#wwd-admin .CodeMirror-linebackground,
+.wwd-admin .CodeMirror-linebackground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0
+}
+
+#wwd-admin .CodeMirror-linewidget,
+.wwd-admin .CodeMirror-linewidget {
+    position: relative;
+    z-index: 2;
+    overflow: auto
+}
+
+#wwd-admin .CodeMirror-code,
+.wwd-admin .CodeMirror-code {
+    outline: 0
+}
+
+#wwd-admin .CodeMirror-gutter,
+#wwd-admin .CodeMirror-gutters,
+#wwd-admin .CodeMirror-linenumber,
+#wwd-admin .CodeMirror-scroll,
+#wwd-admin .CodeMirror-sizer,
+.wwd-admin .CodeMirror-gutter,
+.wwd-admin .CodeMirror-gutters,
+.wwd-admin .CodeMirror-linenumber,
+.wwd-admin .CodeMirror-scroll,
+.wwd-admin .CodeMirror-sizer {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box
+}
+
+#wwd-admin .CodeMirror-measure,
+.wwd-admin .CodeMirror-measure {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden
+}
+
+#wwd-admin .CodeMirror-cursor,
+.wwd-admin .CodeMirror-cursor {
+    position: absolute
+}
+
+#wwd-admin .CodeMirror-measure pre,
+.wwd-admin .CodeMirror-measure pre {
+    position: static
+}
+
+#wwd-admin div.CodeMirror-cursors,
+.wwd-admin div.CodeMirror-cursors {
+    visibility: hidden;
+    position: relative;
+    z-index: 3
+}
+
+#wwd-admin .CodeMirror-focused div.CodeMirror-cursors,
+#wwd-admin div.CodeMirror-dragcursors,
+.wwd-admin .CodeMirror-focused div.CodeMirror-cursors,
+.wwd-admin div.CodeMirror-dragcursors {
+    visibility: visible
+}
+
+#wwd-admin .CodeMirror-selected,
+.wwd-admin .CodeMirror-selected {
+    background: #d9d9d9
+}
+
+#wwd-admin .CodeMirror-focused .CodeMirror-selected,
+.wwd-admin .CodeMirror-focused .CodeMirror-selected {
+    background: #d7d4f0
+}
+
+#wwd-admin .CodeMirror-crosshair,
+.wwd-admin .CodeMirror-crosshair {
+    cursor: crosshair
+}
+
+#wwd-admin .CodeMirror-line::selection,
+#wwd-admin .CodeMirror-line>span::selection,
+#wwd-admin .CodeMirror-line>span>span::selection,
+.wwd-admin .CodeMirror-line::selection,
+.wwd-admin .CodeMirror-line>span::selection,
+.wwd-admin .CodeMirror-line>span>span::selection {
+    background: #d7d4f0
+}
+
+#wwd-admin .CodeMirror-line::-moz-selection,
+#wwd-admin .CodeMirror-line>span::-moz-selection,
+#wwd-admin .CodeMirror-line>span>span::-moz-selection,
+.wwd-admin .CodeMirror-line::-moz-selection,
+.wwd-admin .CodeMirror-line>span::-moz-selection,
+.wwd-admin .CodeMirror-line>span>span::-moz-selection {
+    background: #d7d4f0
+}
+
+#wwd-admin .cm-searching,
+.wwd-admin .cm-searching {
+    background: #ffa;
+    background: rgba(255, 255, 0, .4)
+}
+
+#wwd-admin .cm-force-border,
+.wwd-admin .cm-force-border {
+    padding-right: .1px
+}
+
+@media print {
+    #wwd-admin .CodeMirror div.CodeMirror-cursors,
+    .wwd-admin .CodeMirror div.CodeMirror-cursors {
+        visibility: hidden
+    }
+}
+
+#wwd-admin .cm-tab-wrap-hack:after,
+.wwd-admin .cm-tab-wrap-hack:after {
+    content: ''
+}
+
+#wwd-admin span.CodeMirror-selectedtext,
+.wwd-admin span.CodeMirror-selectedtext {
+    background: 0 0
+}
+
+#wwd-admin .CodeMirror,
+.wwd-admin .CodeMirror {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 500px;
+    font-weight: 400
+}
+
+#wwd-admin .CodeMirror-empty,
+.wwd-admin .CodeMirror-empty {
+    color: #999
+}
+
+#wwd-admin .field-wizard h3,
+.wwd-admin .field-wizard h3 {
+    margin-top: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 12px
+}
+
+#wwd-admin .field-wizard code,
+.wwd-admin .field-wizard code {
+    margin-left: 10px
+}
+
+#wwd-admin .field-wizard>div,
+.wwd-admin .field-wizard>div {
+    margin: 24px 0
+}
+
+#wwd-admin label,
+#wwd-admin .field-wizard label,
+.wwd-admin .field-wizard label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 3px
+}
+
+#wwd-admin .field-wizard table,
+.wwd-admin .field-wizard table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+#wwd-admin .field-wizard .cb-wrap,
+.wwd-admin .field-wizard .cb-wrap {
+    font-weight: 400
+}
+
+#wwd-admin .field-wizard .cb-wrap input,
+.wwd-admin .field-wizard .cb-wrap input {
+    margin-right: 6px
+}
+
+#wwd-admin .field-wizard .limit-height,
+.wwd-admin .field-wizard .limit-height {
+    border: 1px solid #eee;
+    padding: 6px;
+    max-height: 200px;
+    overflow-y: scroll
+}
+
+#wwd-admin .field-wizard .help,
+.wwd-admin .field-wizard .help {
+    margin-top: 0
+}
+
+#wwd-admin .available-fields,
+.wwd-admin .available-fields {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background: #fff
+}
+
+#wwd-admin .available-fields h4,
+.wwd-admin .available-fields h4 {
+    font-size: 14px;
+    margin-top: 0
+}
+
+#wwd-admin .available-fields strong,
+.wwd-admin .available-fields strong {
+    display: block;
+    margin-bottom: 6px
+}
+
+#wwd-admin .available-fields button,
+.wwd-admin .available-fields button {
+    margin: 0 6px 6px 0
+}
+
+#wwd-admin .available-fields .is-required:after,
+.wwd-admin .available-fields .is-required:after {
+    content: " *";
+    color: red
+}
+
+#wwd-admin .available-fields .is-required.not-in-form,
+.wwd-admin .available-fields .is-required.not-in-form {
+    -webkit-box-shadow: 0 0 3px 1px red;
+    -moz-box-shadow: 0 0 3px 1px red;
+    box-shadow: 0 0 3px 1px red
+}
+
+#wwd-admin .available-fields .in-form,
+.wwd-admin .available-fields .in-form {
+    opacity: .5
+}
+
+#wwd-admin .page-title,
+.wwd-admin .page-title {
+    background: url(../img/icon-large.png) left center no-repeat;
+    padding-left: 42px;
+    line-height: 32px;
+    margin-bottom: 20px;
+}
+
+#wwd-admin .page-title small,
+.wwd-admin .page-title small {
+    font-size: 12px;
+    color: #777;
+    display: inline-block;
+    margin-left: 10px
+}
+
+#wwd-admin .button .dashicons,
+#wwd-admin .button-secondary .dashicons,
+#wwd-admin .page-title-action .dashicons,
+.wwd-admin .button .dashicons,
+.wwd-admin .button-secondary .dashicons,
+.wwd-admin .page-title-action .dashicons {
+    vertical-align: middle;
+    line-height: 16px;
+    margin: 0 4px 0 0
+}
+
+#wwd-admin .form-table td p,
+.wwd-admin .form-table td p {
+    margin-top: 1em
+}
+
+#wwd-admin .sidebar,
+.wwd-admin .sidebar {
+    border-left: 1px solid #ccc
+}
+
+#wwd-admin .sidebar h3,
+#wwd-admin .sidebar h4,
+.wwd-admin .sidebar h3,
+.wwd-admin .sidebar h4 {
+    font-size: 16px;
+    margin-bottom: 0
+}
+
+#wwd-admin .sidebar>div,
+.wwd-admin .sidebar>div {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding-bottom: 20px
+}
+
+#wwd-admin .sidebar>div:last-of-type,
+.wwd-admin .sidebar>div:last-of-type {
+    border-bottom: 0
+}
+
+.wwd-log,
+.overlay {
+    border: 1px solid #ccc;
+    overflow-y: scroll
+}
+
+.wwd-log {
+    font-family: monaco, monospace, courier, 'courier new', 'Bitstream Vera Sans Mono';
+    font-size: 13px;
+    resize: vertical;
+    line-height: 140%;
+    height: 200px;
+    padding: 6px;
+    background: #262626;
+    color: #fff
+}
+
+.wwd-log .time {
+    color: #b58900
+}
+
+.wwd-log .level {
+    color: #35AECD
+}
+
+.wwd-log .debug-log-empty {
+    color: #ccc;
+    font-style: italic
+}
+
+.wwd-log .hidden {
+    display: none
+}
+
+.wwd-log a {
+    color: #ccc;
+    text-decoration: underline
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    padding: 20px;
+    max-width: 480px;
+    max-height: 100%;
+    background: #fefefe;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.overlay .close {
+    position: absolute;
+    padding: 10px;
+    right: 0;
+    top: 0;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: .5
+}
+
+.overlay .close:hover {
+    opacity: 1
+}
+
+.overlay-background {
+    z-index: 99998;
+    background: rgba(0, 0, 0, .67);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0
+}
+
+.rtl .overlay .close {
+    right: auto;
+    left: 0
+}
+
+.rtl #wwd-admin .page-title {
+    background-position: right center;
+    padding-left: 0;
+    padding-right: 42px
+}
+
+.rtl #wwd-admin .CodeMirror-scroll {
+    overflow-y: hidden!important
+}
+
+.rtl #wwd-admin .CodeMirror-vscrollbar {
+    left: 0!important;
+    right: auto!important
+}
+
+.rtl .wwd-is-dismissible {
+    padding-left: 38px;
+    padding-right: initial;
+    position: relative
+}

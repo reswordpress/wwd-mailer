@@ -114,6 +114,11 @@ class Wwd_Mailer {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-admin.php';
 
 		/**
+		 * The class responsible for doing all the mailing logic.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-mail.php';		
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -156,6 +161,7 @@ class Wwd_Mailer {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin,  'build_menu'  );
 
+		$this->loader->add_action( 'wp_ajax_process_email', $plugin_admin, 'process_email' );
 
 	}
 
@@ -214,5 +220,7 @@ class Wwd_Mailer {
 	public function get_version() {
 		return $this->version;
 	}
+
+
 
 }
