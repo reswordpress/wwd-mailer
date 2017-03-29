@@ -31,6 +31,15 @@
 				<?php _e( 'Send an email to all your users', 'wwd-mailer' ); ?>
 			</h1>
 
+			<div class="mailer-messaging">
+				<h2 class="page-loader">
+					<?php _e( 'Sending mail...', 'wwd-mailer' ); ?>		
+				</h2>
+				<p>Successful mail count: <span data-count="0" class="success-count">0</span></p>
+				<p>Failed mail count: <span data-count="0" class="fail-count">0</span></p>
+				<ul class="emailed-list"></ul>
+			</div>
+
 			<form method="post" id="wwd-mailer-form">
 
 			<table class="form-table" style="width:100%" >
@@ -38,21 +47,21 @@
 				  <tr valign="top" >
 				     <td>    
 				     	<label>Subject *</label>
-				        <input type="text" id="email_subject" name="email_subject"  class="valid" size="70">
+				        <input type="text" id="email_subject" name="email_subject"  class="valid" size="70" required="required">
 				        
 				      </td>
 				   </tr>
 				   <tr valign="top" >
 				     <td>    
 				     	<label>Email From Name *</label>
-				        <input type="text" id="email_From_name" name="email_from_name"  class="valid" size="70">
+				        <input type="text" id="email_From_name" name="email_from_name"  class="valid" size="70" required="required">
 				         <br/>(ex. Site admin)    
 				      </td>
 				   </tr>
 				   <tr valign="top" >
 				     <td>   
 				     	<label>Email From *</label> 
-				        <input type="text" id="email_From" name="email_from_email"  class="valid" size="70">
+				        <input type="email" id="email_From" name="email_from_email"  class="valid" size="70" required="required">
 				        <br/>(ex. admin@yoursite.com) 
 				      </td>
 				   </tr>
@@ -60,13 +69,14 @@
 				     <td>    
 				       <label>Email Body  *</label> 
 				       <div class="wrap">
-				       	<textarea id="body"  name="email_body"  cols="100" rows="10"></textarea>
+				       	<textarea id="body"  name="email_body"  cols="100" rows="10" required="required"></textarea>
 				       	</div>
 				          
 				      </td>
 				   </tr>
 				   <tr valign="top" id="subject">
 				     <td> 
+				       <input type="hidden" name="count-box" id="count-box" value="0">
 				       <input type="hidden" name="action" value="process_email">
 				       <?php wp_nonce_field('action_mass_email_nonce','mass_email_nonce'); ?>  
 				       <input type='submit'  value='Send Email' name='send_send' class='button-primary' id='email_send' >  

@@ -133,6 +133,56 @@ class Wwd_Mailer_Admin {
 		$mailer->process_email();
 	}	
 
+	/**
+	 * Creates a user setting for
+	 * opting out of mass mail
+	 *
+	 * @since     1.0.0
+	 * @return    string    HTML part.
+	 */
+	public function show_opt_out($user) {
+		
+		$opt_out = esc_attr( get_the_author_meta( 'wwd-opt-out', $user->ID ) )	;
+    	echo	'<h3>WWD Mailer</h3>
+
+			<table class="form-table">
+
+				<tr>
+					<th><label for="twitter">Exclude from mass mailouts</label></th>
+
+					<td>
+						<input type="checkbox" name="wwd-opt-out" id="iwwd-opt-out" value="1" '. checked( true, $opt_out ) . ' " />
+						<br />
+						<span class="description">Leave unchecked if user is to recieve emails.</span>
+					</td>
+				</tr>
+
+			</table>';
+	}	
+
+	/**
+	 * Saves user setting for
+	 * opting out of mass mail
+	 *
+	 * @since     1.0.0
+	 */
+	public function save_opt_out($user_id) {
+		
+		if(array_key_exists('wwd-opt-out', $_POST)) {
+
+			if ( !current_user_can( 'edit_user', $user_id ) )
+			return false;
+
+			$wwd_opt_out = (int) $_POST['wwd-opt-out'];
+
+			update_user_meta( $user_id, 'wwd-opt-out', $wwd_opt_out );
+
+		}else{
+			update_user_meta( $user_id, 'wwd-opt-out', 0 );
+		}		
+    	
+	}	
+
 
 
 

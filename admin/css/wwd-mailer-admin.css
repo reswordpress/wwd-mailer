@@ -947,6 +947,14 @@
     margin-bottom: 20px;
 }
 
+#wwd-admin .page-loader,
+.wwd-admin .page-loader {
+    background: url(../img/gear.gif) left center no-repeat;
+    padding-left: 42px;
+    line-height: 32px;
+    margin-bottom: 20px;
+}
+
 #wwd-admin .page-title small,
 .wwd-admin .page-title small {
     font-size: 12px;
@@ -1097,4 +1105,8 @@
     padding-left: 38px;
     padding-right: initial;
     position: relative
+}
+
+.mailer-messaging {
+    display: none;
 }

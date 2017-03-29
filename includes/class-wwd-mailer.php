@@ -163,6 +163,12 @@ class Wwd_Mailer {
 
 		$this->loader->add_action( 'wp_ajax_process_email', $plugin_admin, 'process_email' );
 
+		$this->loader->add_action( 'show_user_profile', $plugin_admin, 'show_opt_out' );
+		$this->loader->add_action( 'edit_user_profile', $plugin_admin, 'show_opt_out' );
+
+		$this->loader->add_action( 'personal_options_update', $plugin_admin, 'save_opt_out' );
+		$this->loader->add_action( 'edit_user_profile_update', $plugin_admin, 'save_opt_out' );
+
 	}
 
 	/**
