@@ -53,6 +53,7 @@
 				        
 				      </td>
 				   </tr>
+				   <?php if(!is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) { ?>
 				   <tr valign="top" >
 				     <td>    
 				     	<label><?php _e( 'From Name', 'wwd-mailer' ); ?> *</label>
@@ -67,11 +68,12 @@
 				        <br/><?php _e( '(ex. info@mysite.com)', 'wwd-mailer' ); ?> 
 				      </td>
 				   </tr>
+				   <?php } ?>
 				   <tr valign="top" >
 				     <td>    
 				       <label><?php _e( 'Email Body', 'wwd-mailer' ); ?>  *</label> 
 				       <div class="wrap">
-				       	<textarea id="body"  name="email_body"  cols="100" rows="10" required="required"></textarea>
+				       	<textarea id="body"  name="email_body"   rows="10" required="required"></textarea>
 				       	</div>
 				          
 				      </td>

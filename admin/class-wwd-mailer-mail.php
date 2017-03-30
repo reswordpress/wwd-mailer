@@ -62,10 +62,10 @@ class Wwd_Mailer_Mail {
 
 		$args = array(
 			'offset' => $offset,
-			'number' => 100,
+			'number' => 10,
 			'meta_key'     => 'wwd-opt-out',
-			'meta_value'   => '1',
-			//'meta_compare' => 'NOT EXISTS'
+			'meta_value'   => '',
+			'meta_compare' => 'NOT EXISTS'
 		);
 
 		$this->users = get_users( $args );
@@ -85,9 +85,12 @@ class Wwd_Mailer_Mail {
 	 */
 	public function set_headers() {
 
-		$this->headers .= "X-Priority: 1\n";
-        $this->headers .= "Content-Type: text/html; charset=\"UTF-8\"\n";
-        $this->headers .= "From: ".$this->form->fields['email_from_name']." <".$this->form->fields['email_from_email'].">" . "\r\n";
+		if(!is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
+
+			$this->headers .= "X-Priority: 1\n";
+	        $this->headers .= "Content-Type: text/html; charset=\"UTF-8\"\n";
+	        $this->headers .= "From: ".$this->form->fields['email_from_name']." <".$this->form->fields['email_from_email'].">" . "\r\n";
+	    }
 
         return $this->headers;
 
@@ -105,31 +108,22 @@ class Wwd_Mailer_Mail {
 
 		if(is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
 
-			if(wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body'])){
-
-				$this->form->messages[] = $this->messaging('success',$user);
-				$this->form->success_count=9;
-
-			}else{
-
-				$this->form->messages[] = $this->messaging('fail',$user);
-				$this->form->fail_count++;
-
-			}
+			$sent = wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body']);
 
 		}else{
 
-			if(wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body'], $this->headers)){
+			$sent = wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body'], $this->headers);
+		}
+
+		if($sent){
 
 				$this->form->messages[] = $this->messaging('success',$user);
 				$this->form->success_count++;
 
-			}else{
+		}else{
 
 				$this->form->messages[] = $this->messaging('fail',$user);
 				$this->form->fail_count++;
-
-			}
 
 		}
 		
@@ -143,7 +137,12 @@ class Wwd_Mailer_Mail {
 	 */
 	public function form_validate(){
 	
-		$fields = array('email_subject','email_from_name','email_from_email','email_body','count');
+		if(is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
+			$fields = array('email_subject','email_body','count');
+		}else{
+			$fields = array('email_subject','email_from_name','email_from_email','email_body','count');
+		}
+		
 		
 	    foreach($fields as $field){
 	   	

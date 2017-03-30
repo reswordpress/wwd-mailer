@@ -43,7 +43,7 @@
 		   	    	$(".fail-count").data('count',fail_count);
 
 		   	    	_count = $("#count-box").val();
-			      	_count = Number(_count) + 100;
+			      	_count = Number(_count) + 10;
 				    $("#count-box").val(_count);
 
 		   	    	var ul = $('.emailed-list');

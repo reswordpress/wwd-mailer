@@ -15,11 +15,14 @@
 ?>
 
 
-<div class="mc4wp-box">
-	<h4 class="mc4wp-title"><?php echo esc_html__( 'Need to exclude users?', 'wwd-mailer' ); ?></h4>
+<div class="wwd-box">
+<h4 class="wwd-title"><?php echo esc_html__( "Avoid your emails ending up in Spam folders", "wwd-mailer" ); ?></h4>
+	<p><?php echo sprintf( __( "Many webservers mark WordPress emails as spam. To avoid this we recommend using the <a href='%s'>WP-Mail-SMTP plugin</a>. Our plugin has be designed to allow for this plugin's extra configurations. " ), "http://www.callum-macdonald.com/code/wp-mail-smtp/" ); ?></p>
+
+	<h4 class="wwd-title"><?php echo esc_html__( 'Need to exclude users?', 'wwd-mailer' ); ?></h4>
 	<p><?php echo sprintf( __( 'Simple just go to <a href="%s">required users</a> and unselect them from mail out.' ), admin_url( 'users.php' ) ); ?></p>
 
-	<h4 class="mc4wp-title"><?php echo esc_html__( 'Need custom WordPress development?', 'wwd-mailer' ); ?></h4>
+	<h4 class="wwd-title"><?php echo esc_html__( 'Need custom WordPress development?', 'wwd-mailer' ); ?></h4>
 	<p><?php echo sprintf( __( 'Then <a href="%s">WWD</a> can deliver you expert WordPress Development support.' ), 'http://wilburblog.co.uk/' ); ?></p>
 	
 	
