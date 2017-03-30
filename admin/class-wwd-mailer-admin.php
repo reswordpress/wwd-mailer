@@ -47,7 +47,7 @@ class Wwd_Mailer_Admin {
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
-	private $required_cap;
+	const REQUIRED_CAP = 'manage_options';
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -59,7 +59,6 @@ class Wwd_Mailer_Admin {
 
 		$this->wwd_mailer = $wwd_mailer;
 		$this->version = $version;
-		$this->required_cap = 'manage_options';
 
 	}
 
@@ -90,11 +89,8 @@ class Wwd_Mailer_Admin {
 	 * Register the setting pages and their menu items
 	 */
 	public function build_menu() {
-		
-		
-		add_menu_page( 'WWD Mailer', 'Send Mail', $this->required_cap, 'wwd_mailer', array( $this, 'load_main_page' ), plugin_dir_url( __FILE__ ) . 'img/icon.png', '99.68491' );
-
-		add_submenu_page( 'wwd_mailer', 'Settings','SMTP Settings',  $this->required_cap, 'wwd_mailer_settings', array( $this, 'load_settings_page' ));
+	
+		add_menu_page( 'WWD Mailer', 'Send Mail', self::REQUIRED_CAP, 'wwd_mailer', array( $this, 'load_main_page' ), plugin_dir_url( __FILE__ ) . 'img/icon.png', '99.68491' );	
 
 	}
 
@@ -143,21 +139,19 @@ class Wwd_Mailer_Admin {
 	public function show_opt_out($user) {
 		
 		$opt_out = esc_attr( get_the_author_meta( 'wwd-opt-out', $user->ID ) )	;
-    	echo	'<h3>WWD Mailer</h3>
+    		
+    	echo   '<h3>WWD Mailer</h3>
 
-			<table class="form-table">
-
-				<tr>
-					<th><label for="twitter">Exclude from mass mailouts</label></th>
-
-					<td>
-						<input type="checkbox" name="wwd-opt-out" id="iwwd-opt-out" value="1" '. checked( true, $opt_out ) . ' " />
-						<br />
-						<span class="description">Leave unchecked if user is to recieve emails.</span>
-					</td>
-				</tr>
-
-			</table>';
+				<table class="form-table">
+					<tr>
+						<th><label for="twitter">Exclude from mass mailouts</label></th>
+						<td>
+							<input type="checkbox" name="wwd-opt-out" id="iwwd-opt-out" value="1" '. checked( true, $opt_out ) . ' " />
+							<br />
+							<span class="description">Leave unchecked if user is to recieve emails.</span>
+						</td>
+					</tr>
+				</table>';
 	}	
 
 	/**
@@ -178,7 +172,7 @@ class Wwd_Mailer_Admin {
 			update_user_meta( $user_id, 'wwd-opt-out', $wwd_opt_out );
 
 		}else{
-			update_user_meta( $user_id, 'wwd-opt-out', 0 );
+			delete_user_meta( $user_id, 'wwd-opt-out' );
 		}		
     	
 	}	

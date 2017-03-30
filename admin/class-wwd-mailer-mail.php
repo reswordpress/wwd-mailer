@@ -62,8 +62,11 @@ class Wwd_Mailer_Mail {
 
 		$args = array(
 			'offset' => $offset,
-			'number' => 100
-			);
+			'number' => 100,
+			'meta_key'     => 'wwd-opt-out',
+			'meta_value'   => '1',
+			//'meta_compare' => 'NOT EXISTS'
+		);
 
 		$this->users = get_users( $args );
 
@@ -73,16 +76,6 @@ class Wwd_Mailer_Mail {
 			die();
 		}
 		
-	}
-
-	/**
-	 * Prepare email for sending
-	 *
-	 * @since    1.0.0
-	 */
-	public function prepare_email() {
-
-
 	}
 
 	/**
@@ -106,24 +99,42 @@ class Wwd_Mailer_Mail {
 	 * @param string $user user email
 	 */
 	public function send_email($user) {
-		
-		/*if(wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body'], $this->headers)){
 
-			$this->messaging('success');
+		$this->form->success_count = 0;
+		$this->form->fail_count = 0;
+
+		if(is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
+
+			if(wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body'])){
+
+				$this->form->messages[] = $this->messaging('success',$user);
+				$this->form->success_count=9;
+
+			}else{
+
+				$this->form->messages[] = $this->messaging('fail',$user);
+				$this->form->fail_count++;
+
+			}
 
 		}else{
 
-			$this->messaging('fail');
+			if(wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body'], $this->headers)){
 
-		}*/
+				$this->form->messages[] = $this->messaging('success',$user);
+				$this->form->success_count++;
 
-		$this->form->messages[] = $this->messaging('success',$user);
+			}else{
 
-		$this->form->success_count++;
-		$this->form->fail_count++;
+				$this->form->messages[] = $this->messaging('fail',$user);
+				$this->form->fail_count++;
 
-		//test
-		//echo $user.' '. $this->form->fields['email_subject'].' '.$this->form->fields['email_body'].' '.$this->headers;
+			}
+
+		}
+		
+		
+
 	}
 
 	/**
@@ -182,10 +193,6 @@ class Wwd_Mailer_Mail {
 
 		json_encode($this->form->messages);
 
-		//messager user
-
-		//tally successful / non successful mails
-
 		$this->form->status = 1;
 		echo json_encode($this->form); 
 		die();
@@ -207,24 +214,6 @@ class Wwd_Mailer_Mail {
 		}
 
 	}
-
-	/**
-	*
-	* validate email
-	* @param string $email
-	*/
-
-	private function valid_email($email) {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '"%s" is not a valid email address',
-                    $email
-                )
-            );
-        }
-	}
-
 
 
 

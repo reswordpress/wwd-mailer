@@ -24,8 +24,6 @@
 	  
 	      data = $("#wwd-mailer-form").serialize();
 
-	      
-
 	      data = data + '&count='+_count;
 	      
 	      $.post(
@@ -51,7 +49,6 @@
 		   	    	var ul = $('.emailed-list');
 
 		   	    	$.each(response.messages,function(index,value){
-					    console.log(value)
 					    
 					    $('ul.emailed-list').prepend('<li>'+value+'</li>');
 
@@ -65,7 +62,7 @@
 			      	$(".mailer-messaging h2").removeClass('page-loader');
 
 			      }else{
-			      	validate_fail();
+			      	validate_fail(response);
 			      }
 	           },
 	           'json'
@@ -75,14 +72,13 @@
 	    function sending_mail(){
 	    	$('#wwd-mailer-form').hide();
 	    	$('html, body').animate({ scrollTop: 0 }, 'fast');
-	    	$(".mailer-messaging").show();
-			//$(".signingup").addClass('glyphicon glyphicon-refresh glyphicon-refresh-animate');
-			//$(".signingup-text").html('Sending mail...');
+	    	$(".mailer-messaging").show();			
 		}
 		
 		function validate_fail(){
-			alert
 			$('#wwd-mailer-form').show();
+			$('.mailer-errors').show();
+			$(".mailer-messaging").hide();
 		}
 
 	});

@@ -3,11 +3,9 @@
 /**
  * Provide a admin area view for the plugin
  *
- * This file is used to markup the admin-facing aspects of the plugin.
+ * Renders the HTML form for sending the email.
  *
- * @link       http://example.com
- * @since      1.0.0
- *
+ * 
  * @package    Wwd_Mailer
  * @subpackage Wwd_Mailer/admin/partials
  */
@@ -31,12 +29,16 @@
 				<?php _e( 'Send an email to all your users', 'wwd-mailer' ); ?>
 			</h1>
 
+			<div class="mailer-errors red">
+			<?php _e( 'Please make sure all fields are required and the Email from field is a vaild email', 'wwd-mailer' ); ?>
+			</div>
+
 			<div class="mailer-messaging">
 				<h2 class="page-loader">
 					<?php _e( 'Sending mail...', 'wwd-mailer' ); ?>		
 				</h2>
-				<p>Successful mail count: <span data-count="0" class="success-count">0</span></p>
-				<p>Failed mail count: <span data-count="0" class="fail-count">0</span></p>
+				<p><?php _e( 'Successful mail count', 'wwd-mailer' ); ?>: <span data-count="0" class="success-count">0</span></p>
+				<p><?php _e( 'Failed mail count', 'wwd-mailer' ); ?>: <span data-count="0" class="fail-count">0</span></p>
 				<ul class="emailed-list"></ul>
 			</div>
 
@@ -46,28 +48,28 @@
 				<tbody>
 				  <tr valign="top" >
 				     <td>    
-				     	<label>Subject *</label>
+				     	<label><?php _e( 'Subject...', 'wwd-mailer' ); ?> *</label>
 				        <input type="text" id="email_subject" name="email_subject"  class="valid" size="70" required="required">
 				        
 				      </td>
 				   </tr>
 				   <tr valign="top" >
 				     <td>    
-				     	<label>Email From Name *</label>
+				     	<label><?php _e( 'From Name', 'wwd-mailer' ); ?> *</label>
 				        <input type="text" id="email_From_name" name="email_from_name"  class="valid" size="70" required="required">
-				         <br/>(ex. Site admin)    
+				         <br/><?php _e( '(ex. Site admin)', 'wwd-mailer' ); ?>    
 				      </td>
 				   </tr>
 				   <tr valign="top" >
 				     <td>   
-				     	<label>Email From *</label> 
-				        <input type="email" id="email_From" name="email_from_email"  class="valid" size="70" required="required">
-				        <br/>(ex. admin@yoursite.com) 
+				     	<label><?php _e( 'Email From', 'wwd-mailer' ); ?> *</label> 
+				        <input type="email" id="email_from" name="email_from_email"  class="valid" size="70" required="required">
+				        <br/><?php _e( '(ex. info@mysite.com)', 'wwd-mailer' ); ?> 
 				      </td>
 				   </tr>
 				   <tr valign="top" >
 				     <td>    
-				       <label>Email Body  *</label> 
+				       <label><?php _e( 'Email Body', 'wwd-mailer' ); ?>  *</label> 
 				       <div class="wrap">
 				       	<textarea id="body"  name="email_body"  cols="100" rows="10" required="required"></textarea>
 				       	</div>
@@ -79,14 +81,13 @@
 				       <input type="hidden" name="count-box" id="count-box" value="0">
 				       <input type="hidden" name="action" value="process_email">
 				       <?php wp_nonce_field('action_mass_email_nonce','mass_email_nonce'); ?>  
-				       <input type='submit'  value='Send Email' name='send_send' class='button-primary' id='email_send' >  
+				       <input type="submit"  value="<?php _e( 'Send Email', 'wwd-mailer' ); ?>" name="send_send" class="button-primary" id="email_send" >  
 				      </td>
 				   </tr>
 				  </tbody> 
 			</table>
 
 			</form>
-
 
 		</div>
 

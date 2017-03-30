@@ -1107,6 +1107,6 @@
     position: relative
 }
 
-.mailer-messaging {
+.mailer-messaging, .mailer-errors {
     display: none;
 }
