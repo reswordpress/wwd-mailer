@@ -7,7 +7,7 @@
  *
  * @package    Wwd_Mailer
  * @subpackage Wwd_Mailer/admin
- * @author     Your Name <email@example.com>
+ * @author     Da Wilbur 
  */
 class Wwd_Mailer_Mail {
 
@@ -48,6 +48,8 @@ class Wwd_Mailer_Mail {
 	 */
 	public function __construct( ) {
 
+		$this->form->fail_count = 0;
+		$this->form->success_count = 0;
 		
 	}
 
@@ -103,28 +105,18 @@ class Wwd_Mailer_Mail {
 	 */
 	public function send_email($user) {
 
-		$this->form->success_count = 0;
-		$this->form->fail_count = 0;
-
 		if(is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
-
 			$sent = wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body']);
-
 		}else{
-
 			$sent = wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body'], $this->headers);
 		}
 
 		if($sent){
-
 				$this->form->messages[] = $this->messaging('success',$user);
 				$this->form->success_count++;
-
 		}else{
-
 				$this->form->messages[] = $this->messaging('fail',$user);
 				$this->form->fail_count++;
-
 		}
 		
 		
@@ -147,8 +139,8 @@ class Wwd_Mailer_Mail {
 	    foreach($fields as $field){
 	   	
 			if(array_key_exists($field, $_POST))
-			$this->form->fields[$field] = sanitize_text_field($_POST[$field]);
-		
+				$this->form->fields[$field] =  htmlentities($_POST[$field]);
+
 			if($_POST[$field] == ''){
 				$this->form->errors[$field] = true;
 			}
@@ -175,8 +167,6 @@ class Wwd_Mailer_Mail {
 	 */
 	public function process_email() {
 		
-		//user index counter
-
 		//validate form
 		$this->form_validate();
 
