@@ -31,7 +31,7 @@ Yes, a setting is added to the users profile for this.
 
 == Screenshots ==
 
-1. screenshot-1.png
+1. A simple form to send emails
 
 == Changelog ==
 
