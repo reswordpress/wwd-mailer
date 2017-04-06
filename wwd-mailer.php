@@ -8,16 +8,16 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://wilburblog.co.uk/wwdmailer
+ * @link              https://wordpress.org/plugins/wwd-mailer/
  * @since             1.0.0
  * @package           Wwd_Mailer
  *
  * @wordpress-plugin
  * Plugin Name:       WWD Mailer
- * Plugin URI:        http://wilburblog.co.uk/wwdmailer
- * Description:       Send bulk email to your WordPress users. It's displayed in the WordPress admin area.
+ * Plugin URI:        hhttps://wordpress.org/plugins/wwd-mailer/
+ * Description:       Send simple text bulk emails to your WordPress users. 
  * Version:           1.0.0
- * Author:            William Honeywill
+ * Author:            Wilbur Web Development
  * Author URI:        http://wilburblog.co.uk/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
