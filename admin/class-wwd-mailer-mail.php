@@ -60,7 +60,7 @@ class Wwd_Mailer_Mail {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_users() {
+	private function get_users() {
 
 		$offset = (int) $this->form->fields['count'];
 
@@ -87,7 +87,7 @@ class Wwd_Mailer_Mail {
 	 *
 	 * @since    1.0.0
 	 */
-	public function set_headers() {
+	private function set_headers() {
 
 		if(!is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
 
@@ -105,7 +105,7 @@ class Wwd_Mailer_Mail {
 	 * Send email using wp_mail function
 	 * @param string $user user email
 	 */
-	public function send_email($user) {
+	private function send_email($user) {
 
 		if(is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
 			$sent = wp_mail($user, $this->form->fields['email_subject'], $this->form->fields['email_body']);
@@ -196,7 +196,7 @@ class Wwd_Mailer_Mail {
 	 * @since    1.0.0
 	 * @param string $result 
 	 */
-	public function messaging($result,$email) {
+	private function messaging($result,$email) {
 
 		if($result === 'success'){
 			return sprintf(__('Email successfully sent to %s','wwd-mailer'),$email);
