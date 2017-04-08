@@ -48,6 +48,8 @@ class Wwd_Mailer_Mail {
 	 */
 	public function __construct( ) {
 
+		if (!isset($this->form)) $this->form = new stdClass();
+
 		$this->form->fail_count = 0;
 		$this->form->success_count = 0;
 		
