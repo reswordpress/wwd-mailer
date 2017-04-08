@@ -119,6 +119,21 @@ class Wwd_Mailer {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-mail.php';		
 
 		/**
+		 * A  WP list class.
+		 */
+		if(!class_exists('WP_List_Table')){
+		    require_once( ABSPATH . 'wp-admin/includes/class-wp-screen.php' );//added
+		    require_once( ABSPATH . 'wp-admin/includes/screen.php' );//added
+		    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+		    require_once( ABSPATH . 'wp-admin/includes/template.php' );
+		}
+
+		/**
+		 * The class responsible for doing all the list logic.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-list.php';	
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -156,6 +171,8 @@ class Wwd_Mailer {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Wwd_Mailer_Admin( $this->get_wwd_mailer(), $this->get_version() );
+
+		$this->loader->add_action( 'init', $plugin_admin, 'create_post_type' );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

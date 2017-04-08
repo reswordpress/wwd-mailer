@@ -91,6 +91,7 @@ class Wwd_Mailer_Admin {
 	public function build_menu() {
 	
 		add_menu_page( 'WWD Mailer', 'Send Mail', self::REQUIRED_CAP, 'wwd_mailer', array( $this, 'load_main_page' ), plugin_dir_url( __FILE__ ) . 'img/icon.png', '99.68491' );	
+		add_submenu_page( 'wwd_mailer','Lists', 'Lists', self::REQUIRED_CAP, 'wwd_mailer_lists', array( $this, 'load_list_page' ) );
 
 	}
 
@@ -104,6 +105,17 @@ class Wwd_Mailer_Admin {
 		include( plugin_dir_path( __FILE__ ) . 'partials/wwd-mailer-admin-display.php' );
 
 	}
+
+	/**
+	 * Load main list admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function load_list_page() {
+
+		include( plugin_dir_path( __FILE__ ) . 'partials/wwd-mailer-admin-list.php' );
+
+	}	
 
 
 	/**
