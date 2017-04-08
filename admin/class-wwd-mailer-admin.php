@@ -63,6 +63,25 @@ class Wwd_Mailer_Admin {
 	}
 
 	/**
+	 * Creates a post type for storing lists.
+	 *
+	 * @since    1.0.0
+	 */
+	public function create_post_type() {
+
+		register_post_type( 'wwd_mailer_list',
+	    array(
+	      'labels' => array(
+	        'name' => __( 'Lists' ),
+	        'singular_name' => __( 'list' )
+	      ),
+	      'public' => false,
+	      'has_archive' => true,
+	    )
+	  );
+}
+
+	/**
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since    1.0.0
@@ -81,6 +100,7 @@ class Wwd_Mailer_Admin {
 	public function enqueue_scripts() {
 
 		wp_enqueue_script( $this->wwd_mailer, plugin_dir_url( __FILE__ ) . 'js/wwd-mailer-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->wwd_mailer.'list', plugin_dir_url( __FILE__ ) . 'js/wwd-mailer-list.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -140,6 +160,18 @@ class Wwd_Mailer_Admin {
 		$mailer = new Wwd_Mailer_Mail();
 		$mailer->process_email();
 	}	
+
+	/**
+	 * Creates an instance of the Wwd_Mailer_Mail Class
+	 * and starts the mail sending
+	 *
+	 * @since     1.0.0
+	 * @return    string    The version number of the plugin.
+	 */
+	public function save_list() {
+		$list = new Wwd_Mailer_List();
+		$list->save_list();
+	}		
 
 	/**
 	 * Creates a user setting for

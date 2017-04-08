@@ -131,7 +131,8 @@ class Wwd_Mailer {
 		/**
 		 * The class responsible for doing all the list logic.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-list.php';	
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-list.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-list-table.php';	
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -179,6 +180,7 @@ class Wwd_Mailer {
 		$this->loader->add_action( 'admin_menu', $plugin_admin,  'build_menu'  );
 
 		$this->loader->add_action( 'wp_ajax_process_email', $plugin_admin, 'process_email' );
+		$this->loader->add_action( 'wp_ajax_save_list', $plugin_admin, 'save_list' );
 
 		$this->loader->add_action( 'show_user_profile', $plugin_admin, 'show_opt_out' );
 		$this->loader->add_action( 'edit_user_profile', $plugin_admin, 'show_opt_out' );

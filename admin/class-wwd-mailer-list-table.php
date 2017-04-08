@@ -8,7 +8,7 @@
  * @subpackage Wwd_Mailer/admin
  * @author     Da Wilbur 
  */
-class Wwd_Mailer_List  {
+class Wwd_Mailer_List_Table extends WP_List_Table {
 
 	/**
 	 * WP Users.
@@ -39,7 +39,26 @@ class Wwd_Mailer_List  {
 	 */
 	public function __construct( ) {
 
-		
+		parent::__construct( array(
+			'singular' => 'list',     // Singular name of the listed records.
+			'plural'   => 'lists',    // Plural name of the listed records.
+			'ajax'     => false,       // Does this table support ajax?
+		) );
+
+		$this->lists = array(
+  array('ID' => 1,'booktitle' => 'Quarter Share', 'author' => 'Nathan Lowell',
+        'isbn' => '978-0982514542'),
+  array('ID' => 2, 'booktitle' => '7th Son: Descent','author' => 'J. C. Hutchins',
+        'isbn' => '0312384378'),
+  array('ID' => 3, 'booktitle' => 'Shadowmagic', 'author' => 'John Lenahan',
+        'isbn' => '978-1905548927'),
+  array('ID' => 4, 'booktitle' => 'The Crown Conspiracy', 'author' => 'Michael J. Sullivan',
+        'isbn' => '978-0979621130'),
+  array('ID' => 5, 'booktitle'     => 'Max Quick: The Pocket and the Pendant', 'author'    => 'Mark Jeffrey',
+        'isbn' => '978-0061988929'),
+  array('ID' => 6, 'booktitle' => 'Jack Wakes Up: A Novel', 'author' => 'Seth Harwood',
+        'isbn' => '978-0307454355')
+);
 		
 	}
 
@@ -116,7 +135,7 @@ class Wwd_Mailer_List  {
 	      default:
 	        return print_r( $item, true ) ; //Show the whole array for troubleshooting purposes
 	  }
-	  
+
 	}
 
 
@@ -129,15 +148,21 @@ class Wwd_Mailer_List  {
 	 */
 	public function form_validate(){
 	
-		$fields = array('list_name');
+		
 		
 	    foreach($fields as $field){
 	   	
 			if(array_key_exists($field, $_POST))
-				$this->form->fields[$field] =  sanitize_text_field($_POST[$field]);
+				$this->form->fields[$field] =  htmlentities($_POST[$field]);
 
 			if($_POST[$field] == ''){
 				$this->form->errors[$field] = true;
+			}
+				
+			if($field == 'email_from_email'){
+				if(!is_email($_POST[$field])){
+					$this->form->errors[$field] = true;
+				}
 			}
 			
 		}
@@ -156,23 +181,24 @@ class Wwd_Mailer_List  {
 	 *
 	 * @since    1.0.0
 	 */
-	public function save_list() {
+	public function process_email() {
 		
+		//validate form
 		$this->form_validate();
 
-		$args = array(
-					'post_title'=> $this->form->->fields['list_name'],
-					'post_type'=>'wwd-mailer-list'
-					)
+		//get the users
+		$this->get_users();
 
-		if(wp_insert_post($args) > 0){
-			$this->form->message = __('List successfully added','wwd-mailer');
-			$this->form->status = 1;
-		}else{
-			$this->form->message = __('There was a problem adding the list','wwd-mailer');
-			$this->form->status = 0;
-		};
+		$this->set_headers();
+		
+		//send mail
+		foreach ($this->users as $user) {
+			$this->send_email($user->data->user_email);
+		}
 
+		json_encode($this->form->messages);
+
+		$this->form->status = 1;
 		echo json_encode($this->form); 
 		die();
 	}
