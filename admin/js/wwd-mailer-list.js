@@ -25,8 +25,10 @@
 	           function(response){
 	              if(response.status === 1){
 	              	console.log(response);
-	              	
-
+	              	$('#wwd-mailer-form-list').show();
+	              	$(".mailer-messaging h2").text('List added!');	
+	              	$(".mailer-messaging h2").removeClass('page-loader');		
+	              	$("#list-name").val('');
 			      }else{
 			      	validate_fail(response);
 			      }
@@ -38,7 +40,9 @@
 	    function sending_mail(){
 	    	$('#wwd-mailer-form-list').hide();
 	    	$('html, body').animate({ scrollTop: 0 }, 'fast');
-	    	$(".mailer-messaging").show();			
+	    	$(".mailer-messaging").show();	
+	    	$(".mailer-messaging h2").text('Saving list...');
+	    	$(".mailer-messaging h2").addClass('page-loader');		
 		}
 		
 		function validate_fail(){

@@ -44,21 +44,6 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 			'plural'   => 'lists',    // Plural name of the listed records.
 			'ajax'     => false,       // Does this table support ajax?
 		) );
-
-		$this->lists = array(
-  array('ID' => 1,'booktitle' => 'Quarter Share', 'author' => 'Nathan Lowell',
-        'isbn' => '978-0982514542'),
-  array('ID' => 2, 'booktitle' => '7th Son: Descent','author' => 'J. C. Hutchins',
-        'isbn' => '0312384378'),
-  array('ID' => 3, 'booktitle' => 'Shadowmagic', 'author' => 'John Lenahan',
-        'isbn' => '978-1905548927'),
-  array('ID' => 4, 'booktitle' => 'The Crown Conspiracy', 'author' => 'Michael J. Sullivan',
-        'isbn' => '978-0979621130'),
-  array('ID' => 5, 'booktitle'     => 'Max Quick: The Pocket and the Pendant', 'author'    => 'Mark Jeffrey',
-        'isbn' => '978-0061988929'),
-  array('ID' => 6, 'booktitle' => 'Jack Wakes Up: A Novel', 'author' => 'Seth Harwood',
-        'isbn' => '978-0307454355')
-);
 		
 	}
 
@@ -67,25 +52,33 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	 *
 	 * @since    1.0.0
 	 */
-	private function get_lists() {
+	public function get_lists() {
 
-		$offset = (int) $this->form->fields['count'];
+		//$offset = (int) $this->form->fields['count'];
+		$offset = 0 ;
 
 		$args = array(
 			'offset' => $offset,
 			'number' => 10,
-			'meta_key'     => 'wwd-opt-out',
-			'meta_value'   => '',
-			'meta_compare' => 'NOT EXISTS'
+			'post_type'     => 'wwd_mailer_list',
 		);
 
-		$this->users = get_users( $args );
-
-		if ( empty($this->users) ){
-			$this->form->status = 2;
-			echo json_encode($this->form); 
-			die();
+		if($_GET){
+			if(array_key_exists('orderby', $_GET)){
+				$args['orderby'] = 'title';
+			}
+			if(array_key_exists('order', $_GET)){
+				$args['order'] = sanitize_text_field($_GET['order']);
+			}
 		}
+
+		$this->lists = get_posts( $args );
+
+		foreach ($this->lists as $key => $value) {
+			$this->items[] = array('title'=>$value->post_title,'ID'=>$value->ID);
+		}
+
+		print_r($this->items);
 		
 	}
 
@@ -97,9 +90,10 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	public function get_columns(){
 
 	    $columns = array(
-	      'booktitle' => 'List',
-	      'author'    => 'Users',
-	      'isbn'      => 'Mailouts'
+	      'cb'  => '<input type="checkbox" />',	
+	      'title' => 'List',
+	      'users'    => 'Users',
+	      'mailouts'      => 'Mailouts'
 	    );
 	    return $columns;
 
@@ -111,13 +105,21 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	 * @since    1.0.0
 	 */
 	public function prepare_items() {
+
+		$per_page = 3;
+  		$current_page = $this->get_pagenum();
+  		$total_items = count($this->items);
+
+  		$this->set_pagination_args( array(
+		    'total_items' => $total_items,                  //WE have to calculate the total number of items
+		    'per_page'    => $per_page                     //WE have to determine how many items to show on a page
+		) );
 	    
 	    $columns = $this->get_columns();
 	    $hidden = array();
-	    $sortable = array();
+	    $sortable = $this->get_sortable_columns();
 	    $this->_column_headers = array($columns, $hidden, $sortable);
-	    $this->items = $this->lists;
-
+	    
 	}
 
 	/**
@@ -128,7 +130,7 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	public function column_default( $item, $column_name ) {
 
 	    switch( $column_name ) { 
-	      case 'lists':
+	      case 'title':
 	      case 'users':
 	      case 'mailouts':
 	        return $item[ $column_name ];
@@ -139,86 +141,64 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	}
 
 
-
-
-
 	/**
-	 * Validate form
-	 * @param object form object
-	 */
-	public function form_validate(){
-	
-		
-		
-	    foreach($fields as $field){
-	   	
-			if(array_key_exists($field, $_POST))
-				$this->form->fields[$field] =  htmlentities($_POST[$field]);
-
-			if($_POST[$field] == ''){
-				$this->form->errors[$field] = true;
-			}
-				
-			if($field == 'email_from_email'){
-				if(!is_email($_POST[$field])){
-					$this->form->errors[$field] = true;
-				}
-			}
-			
-		}
-		
-		if(property_exists($this->form,'errors')){
-			$this->form->status = 0;
-			echo json_encode($this->form); 
-			die();
-		}
-	}
-
-	
-
-	/**
-	 * WP AJAX action
+	 * Get colums headinds
 	 *
 	 * @since    1.0.0
 	 */
-	public function process_email() {
-		
-		//validate form
-		$this->form_validate();
+	public function get_sortable_columns() {
 
-		//get the users
-		$this->get_users();
+	    $sortable_columns = array(
+	      'title'  => array('title',false),
+	      'users' => array('users',false),
+	      'mailouts'   => array('mailouts',false)
+	    );
+	    return $sortable_columns;
 
-		$this->set_headers();
-		
-		//send mail
-		foreach ($this->users as $user) {
-			$this->send_email($user->data->user_email);
-		}
-
-		json_encode($this->form->messages);
-
-		$this->form->status = 1;
-		echo json_encode($this->form); 
-		die();
 	}
-
 
 	/**
-	 * Messaging to inform admin of each email status
+	 * Get colums headinds
 	 *
 	 * @since    1.0.0
-	 * @param string $result 
 	 */
-	private function messaging($result,$email) {
+	public function column_title($item) {
 
-		if($result === 'success'){
-			return sprintf(__('Email successfully sent to %s','wwd-mailer'),$email);
-		}else{
-			return sprintf(__('Email failed to send to %s','wwd-mailer'),$email);
-		}
+	    $actions = array(
+	            'edit'      => sprintf('<a href="?page=%s&action=%s&list=%s">Edit</a>',$_REQUEST['page'],'edit',$item['ID']),
+	            'delete'    => sprintf('<a href="?page=%s&action=%s&list=%s">Delete</a>',$_REQUEST['page'],'delete',$item['ID']),
+	        );
+
+	    return sprintf('%1$s %2$s', $item['title'], $this->row_actions($actions) );
 
 	}
+
+	/**
+	 * Get colums headinds
+	 *
+	 * @since    1.0.0
+	 */
+	function column_cb($item) {
+        return sprintf(
+            '<input type="checkbox" name="list[]" value="%s" />', $item['ID']
+        );    
+    }
+
+	/**
+	 * Get colums headinds
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_bulk_actions() {
+
+	    $actions = array(
+	      'delete'    => 'Delete'
+	    );
+	    return $actions;
+
+	}
+
+
 
 
 

@@ -75,7 +75,7 @@ class Wwd_Mailer_Admin {
 	        'name' => __( 'Lists' ),
 	        'singular_name' => __( 'list' )
 	      ),
-	      'public' => false,
+	      'public' => true,
 	      'has_archive' => true,
 	    )
 	  );

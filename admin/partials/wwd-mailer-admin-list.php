@@ -33,16 +33,14 @@ $list = new Wwd_Mailer_List_Table();
 			</h1>
 
 			<div class="mailer-errors red">
-			<?php _e( 'Please make sure all fields are required and the Email from field is a vaild email', 'wwd-mailer' ); ?>
+			<?php _e( 'Please add a list', 'wwd-mailer' ); ?>
 			</div>
 
 			<div class="mailer-messaging">
 				<h2 class="page-loader">
-					<?php _e( 'Sending mail...', 'wwd-mailer' ); ?>		
+					<?php _e( 'Saving list', 'wwd-mailer' ); ?>...	
 				</h2>
-				<p><?php _e( 'Successful mail count', 'wwd-mailer' ); ?>: <span data-count="0" class="success-count">0</span></p>
-				<p><?php _e( 'Failed mail count', 'wwd-mailer' ); ?>: <span data-count="0" class="fail-count">0</span></p>
-				<ul class="emailed-list"></ul>
+				
 			</div>
 
 			<form method="post" id="wwd-mailer-form-list">
@@ -69,8 +67,11 @@ $list = new Wwd_Mailer_List_Table();
 			</form>
 
 			<div class="wrap">
-				<?php $list->prepare_items(); ?>
-  				<?php echo $list->display(); ?>
+				<?php 
+				$list->get_lists();
+				$list->prepare_items();
+				echo $list->display(); 
+				?>
   			</div>
 
 		</div>
