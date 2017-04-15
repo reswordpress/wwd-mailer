@@ -27,7 +27,7 @@ class Wwd_Mailer_List  {
 	 * @access   private
 	 * @var      object    $body    
 	 */
-	private $form;
+	public $form;
 
 
 	/**
@@ -39,8 +39,8 @@ class Wwd_Mailer_List  {
 	 */
 	public function __construct( ) {
 
-		
-		
+		if (!isset($this->form)) $this->form = new stdClass();
+
 	}
 
 
@@ -65,8 +65,7 @@ class Wwd_Mailer_List  {
 		
 		if(property_exists($this->form,'errors')){
 			$this->form->status = 0;
-			echo json_encode($this->form); 
-			die();
+			return $this->form; 
 		}
 	}
 
@@ -90,15 +89,28 @@ class Wwd_Mailer_List  {
 		$pid = wp_insert_post($args);
 
 		if($pid > 0){
-			$this->form->message = __('List successfully added','wwd-mailer');
 			$this->form->status = 1;
 		}else{
-			$this->form->message = __('There was a problem adding the list','wwd-mailer');
 			$this->form->status = 0;
 		};
 
-		echo json_encode($this->form); 
-		die();
+		return $this->form; 
+	}
+
+	/**
+	 * Delete a list
+	 *
+	 * @since    1.0.0
+	 */
+	public function delete_list($id) {
+		
+		if(wp_delete_post($id,true)){
+			$this->form->status = 1;
+		}else{
+			$this->form->status = 0;
+		};
+
+		return $this->form; 
 	}
 
 

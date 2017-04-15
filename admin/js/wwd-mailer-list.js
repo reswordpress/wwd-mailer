@@ -5,7 +5,7 @@
 
 		var data = {};
 	  
-		$('#wwd-mailer-form-list').on('submit', function(e){
+		/*$('#wwd-mailer-form-list').on('submit', function(e){
 
 		  e.preventDefault();
 
@@ -13,7 +13,7 @@
 
 		  save_list();
 	    
-	    });
+	    });*/
 
 	    function save_list() {
 

@@ -77,8 +77,6 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 		foreach ($this->lists as $key => $value) {
 			$this->items[] = array('title'=>$value->post_title,'ID'=>$value->ID);
 		}
-
-		print_r($this->items);
 		
 	}
 
