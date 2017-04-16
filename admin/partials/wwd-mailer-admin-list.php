@@ -13,17 +13,25 @@
 $success = false;
 $failed = false;
 $message = "";
+$listname = "";
+$list_edit = __( 'Add List', 'wwd-mailer' );
+$lid = 0;
 
 if($_POST){
+
 	if(array_key_exists('save_list', $_POST)) {
 
 		$list = new Wwd_Mailer_List();
+
 		$list->save_list();
 		if($list->form->status === 1)
 			$success = true;
-			$message = __( 'List added.', 'wwd-mailer' );
+			
 		if($list->form->status === 0)
 			$failed = true;
+
+		$message = $list->form->message;
+
 	}
 }
 
@@ -40,6 +48,11 @@ if($_GET){
 			if($list->form->status === 0)
 				$failed = true;
 
+		}elseif($_GET['action'] === 'edit'){
+			$listname = get_the_title((int)$_GET['list']);
+			$lid = (int)$_GET['list'];
+			$list_edit = __( 'Edit List', 'wwd-mailer' );
+			$list_action = 'edit_list';
 		}
 		
 	}
@@ -81,22 +94,23 @@ $list = new Wwd_Mailer_List_Table();
 			</div>
 <?php } ?>			
 
-			<form method="post" action="#" id="wwd-mailer-form-list">
+			<form method="post" action="<?php echo admin_url( 'admin.php?page=wwd_mailer_lists' ); ?>" id="wwd-mailer-form-list">
 
 			<table class="form-table" style="width:100%" >
 				<tbody>
 				  <tr valign="top" >
 				     <td>    
 				     	<label><?php _e( 'List name', 'wwd-mailer' ); ?> *</label>
-				        <input type="text" id="list-name" name="list_name"  class="valid" size="70" required="required">
+				        <input type="text" id="list-name" name="list_name"  class="valid" size="70" required="required" value="<?php echo $listname; ?>">
 				      </td>
 				   </tr>
 				   
 				   <tr valign="top" >
 				     <td> 
-				       <input type="hidden" name="save_list" value="save_list">
+				      <input type="hidden" name="save_list" value="save_list">
+				      <input type="hidden" name="lid" value="<?php echo $lid; ?>">
 				       <?php wp_nonce_field('action_mass_email_nonce','mass_email_nonce'); ?>  
-				       <input type="submit"  value="<?php _e( 'Add List', 'wwd-mailer' ); ?>" name="send_send" class="button-primary" id="list_save" >  
+				       <input type="submit"  value="<?php echo $list_edit; ?>" name="send_send" class="button-primary" id="list_save" >  
 				      </td>
 				   </tr>
 				  </tbody> 

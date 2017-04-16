@@ -50,7 +50,7 @@ class Wwd_Mailer_List  {
 	 */
 	public function form_validate(){
 	
-		$fields = array('list_name');
+		$fields = array('list_name','lid');
 		
 	    foreach($fields as $field){
 	   	
@@ -72,30 +72,50 @@ class Wwd_Mailer_List  {
 	
 
 	/**
-	 * WP AJAX action
+	 * Save a list
 	 *
 	 * @since    1.0.0
 	 */
 	public function save_list() {
 		
 		$this->form_validate();
+		$lid = (int)$this->form->fields['lid'];
 
-		$args = array(
-					'post_title'=> $this->form->fields['list_name'],
-					'post_type'=>'wwd_mailer_list',
-					'post_status'   => 'publish',
-					);
+		if($lid === 0){
 
-		$pid = wp_insert_post($args);
+			$args = array(
+			'post_title'=> $this->form->fields['list_name'],
+			'post_type'=>'wwd_mailer_list',
+			'post_status'   => 'publish',
+			);
 
-		if($pid > 0){
+			$lid = wp_insert_post($args);
+			$this->form->message = __( 'List added.', 'wwd-mailer' );
+
+		}elseif ($lid > 0) {
+			$args = array(
+			'post_title'=> $this->form->fields['list_name'],
+			'ID'=>$lid
+			);
+
+			$lid = wp_update_post($args);
+
+			$this->form->message = __( 'List updated.', 'wwd-mailer' );
+		}
+
+
+		if($lid > 0){
 			$this->form->status = 1;
 		}else{
 			$this->form->status = 0;
+			$this->form->message = __( 'A problem has occured.', 'wwd-mailer' );
 		};
 
 		return $this->form; 
 	}
+
+
+
 
 	/**
 	 * Delete a list
