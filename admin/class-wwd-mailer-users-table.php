@@ -8,12 +8,16 @@
  * @subpackage Wwd_Mailer/admin
  * @author     Da Wilbur 
  */
-class Wwd_Mailer_List_Table extends WP_List_Table {
+class Wwd_Mailer_Users_Table extends WP_List_Table {
 
 	
-	private $lists;
+	private $users;
 	
 	private $total_items;
+
+	public $list;
+
+	public $listname;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -22,14 +26,36 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	 * @param      string    $wwd_mailer       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( ) {
+	public function __construct(  ) {
 
 		parent::__construct( array(
-			'singular' => 'list',     // Singular name of the listed records.
-			'plural'   => 'lists',    // Plural name of the listed records.
+			'singular' => 'user',     // Singular name of the listed records.
+			'plural'   => 'users',    // Plural name of the listed records.
 			'ajax'     => false,       // Does this table support ajax?
 		) );
 		
+	}
+
+	public function set_list() {
+
+		if($_GET){
+
+			echo 'sdfs';
+
+			if(array_key_exists('list', $_GET)) {
+				$this->list = (int)$_GET['list'];
+			}else{
+				throw new Exception(__( 'Incorrect URL parameters.', 'wwd-mailer' ));
+			}
+		}
+	}
+
+	public function set_listname() {
+
+		echo $this->list;
+
+		$this->listname = get_the_title($this->list);
+
 	}
 
 	/**
@@ -37,18 +63,14 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_lists() {
+	public function get_users() {
+
+		$args = array();
+
+		$this->total_items = count(get_users($args));
 
 		$args = array(
-			'post_type'     => 'wwd_mailer_list',
-			'posts_per_page' => -1
-		);
-
-		$this->total_items = count(get_posts($args));
-
-		$args = array(
-			'numberposts' => 5,
-			'post_type'     => 'wwd_mailer_list',
+			'number' => 5
 		);
 
 		if($_GET){
@@ -64,10 +86,10 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 			}
 		}
 
-		$this->lists = get_posts( $args );
+		$this->users = get_users( $args );
 
-		foreach ($this->lists as $key => $value) {
-			$this->items[] = array('title'=>$value->post_title,'ID'=>$value->ID);
+		foreach ($this->users as $key => $value) {
+			$this->items[] = array('username'=>$value->user_login,'user_nicename'=>$value->user_nicename,'user_email'=>$value->user_email,'ID'=>$value->ID);
 		}
 		
 	}
@@ -81,9 +103,9 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 
 	    $columns = array(
 	      'cb'  => '<input type="checkbox" />',	
-	      'title' => 'List',
-	      'users'    => 'Users',
-	      'mailouts'      => 'Mailouts'
+	      'username' => 'Username',
+	      'user_nicename'    => 'Name',
+	      'user_email'      => 'Email'
 	    );
 	    return $columns;
 
@@ -119,9 +141,9 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	public function column_default( $item, $column_name ) {
 
 	    switch( $column_name ) { 
-	      case 'title':
-	      case 'users':
-	      case 'mailouts':
+	      case 'username':
+	      case 'user_nicename':
+	      case 'user_email':
 	        return $item[ $column_name ];
 	      default:
 	        return print_r( $item, true ) ; //Show the whole array for troubleshooting purposes
@@ -131,16 +153,16 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 
 
 	/**
-	 * Get colums headinds
+	 * Get colums headings
 	 *
 	 * @since    1.0.0
 	 */
 	public function get_sortable_columns() {
 
 	    $sortable_columns = array(
-	      'title'  => array('title',false),
-	      'users' => array('users',false),
-	      'mailouts'   => array('mailouts',false)
+	      'username'  => array('username',false),
+	      'user_nicename' => array('user_nicename',false),
+	      'user_email'   => array('user_email',false)
 	    );
 	    return $sortable_columns;
 
@@ -151,15 +173,13 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	 *
 	 * @since    1.0.0
 	 */
-	public function column_title($item) {
+	public function column_username($item) {
 
 	    $actions = array(
-	            'edit'      => sprintf('<a href="?page=%s&action=%s&list=%s">Edit</a>',$_REQUEST['page'],'edit',$item['ID']),
-	            'delete'    => sprintf('<a href="?page=%s&action=%s&list=%s">Delete</a>',$_REQUEST['page'],'delete',$item['ID']),
-	            'edit_list'    => sprintf('<a href="?page=%s&action=%s&list=%s">Edit List</a>','wwd_mailer_users','edit_list',$item['ID']),
+	            'add'      => sprintf('<a href="?page=%s&action=%s&list=%s&user=%s">Add to list</a>',$_REQUEST['page'],'add',$this->list,$item['ID'])
 	        );
 
-	    return sprintf('%1$s %2$s', $item['title'], $this->row_actions($actions) );
+	    return sprintf('%1$s %2$s', $item['username'], $this->row_actions($actions) );
 
 	}
 
@@ -182,7 +202,7 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	public function get_bulk_actions() {
 
 	    $actions = array(
-	      'delete'    => 'Delete'
+	      'add'    => 'Add to list'
 	    );
 	    return $actions;
 

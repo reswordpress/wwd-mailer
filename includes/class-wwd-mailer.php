@@ -132,7 +132,13 @@ class Wwd_Mailer {
 		 * The class responsible for doing all the list logic.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-list.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-list-table.php';	
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-list-table.php';
+
+		/**
+		 * The class responsible for doing all the users to list logic.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-users-table.php';	
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wwd-mailer-user.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing

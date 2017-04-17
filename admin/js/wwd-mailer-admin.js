@@ -7,7 +7,6 @@
 		var fail_count = 0;
 		var _count = 0;
 		var data = {};
-	  
 
 		$('#wwd-mailer-form').on('submit', function(e){
 
@@ -21,8 +20,7 @@
 	    });
 
 	    function send_mail_batch() {
-
-	      
+	  
 	      data = $("#wwd-mailer-form").serialize();
 
 	      data = data + '&count='+_count;
