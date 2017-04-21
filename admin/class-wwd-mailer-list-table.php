@@ -156,7 +156,7 @@ class Wwd_Mailer_List_Table extends WP_List_Table {
 	    $actions = array(
 	            'edit'      => sprintf('<a href="?page=%s&action=%s&list=%s">Edit</a>',$_REQUEST['page'],'edit',$item['ID']),
 	            'delete'    => sprintf('<a href="?page=%s&action=%s&list=%s">Delete</a>',$_REQUEST['page'],'delete',$item['ID']),
-	            'edit_list'    => sprintf('<a href="?page=%s&action=%s&list=%s">Edit List</a>','wwd_mailer_users','edit_list',$item['ID']),
+	            'edit_list'    => sprintf('<a href="?page=%s&action=%s&list=%s">Edit List</a>','wwd_mailer_list_users','edit_list',$item['ID']),
 	        );
 
 	    return sprintf('%1$s %2$s', $item['title'], $this->row_actions($actions) );

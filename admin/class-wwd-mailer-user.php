@@ -84,7 +84,11 @@ class Wwd_Mailer_User  {
 
 		if($lists = get_user_meta($user, 'wwd-lists')){
 
-			$args = array();
+			$args = $lists;
+			$args[] = $list;
+
+			$m = update_user_meta( $user, 'wwd-lists', $args);
+			echo $m.'updated';
 
 			$this->form->message = __( 'List added.', 'wwd-mailer' );
 
@@ -92,7 +96,8 @@ class Wwd_Mailer_User  {
 
 			$args = array($list);
 
-			add_user_meta( $user, 'wwd-lists', $args);
+			$m = add_user_meta( $user, 'wwd-lists', $args);
+			echo $m.'added';
 
 			$this->form->message = __( 'User add to list updated.', 'wwd-mailer' );
 		}

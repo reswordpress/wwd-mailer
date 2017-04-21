@@ -63,7 +63,7 @@ class Wwd_Mailer_Users_Table extends WP_List_Table {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_users() {
+	public function get_users($list=false) {
 
 		$args = array();
 
@@ -86,10 +86,20 @@ class Wwd_Mailer_Users_Table extends WP_List_Table {
 			}
 		}
 
+		if($list) {
+			$args['meta_key'] = 'wwd-lists';
+			$args['meta_value'] = $list;
+			$args['meta_compare'] = 'IN';
+
+		}
+
+		print_r($args);
+
 		$this->users = get_users( $args );
 
 		foreach ($this->users as $key => $value) {
-			$this->items[] = array('username'=>$value->user_login,'user_nicename'=>$value->user_nicename,'user_email'=>$value->user_email,'ID'=>$value->ID);
+			print_r(get_user_meta($value->ID, 'wwd-lists'));
+			$this->items[] = array('username'=>$value->user_login,'user_nicename'=>$value->display_name,'user_email'=>$value->user_email,'ID'=>$value->ID);
 		}
 		
 	}
