@@ -1,13 +1,8 @@
 <?php
+require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
+ * 
  * @link              https://wordpress.org/plugins/wwd-mailer/
  * @since             1.0.0
  * @package           Wwd_Mailer
@@ -35,8 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
  * This action is documented in includes/class-wwd-mailer-activator.php
  */
 function activate_wwd_mailer() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wwd-mailer-activator.php';
-	Wwd_Mailer_Activator::activate();
+	Wwd\Mailer\Activator::activate();
 }
 
 /**
@@ -44,18 +38,13 @@ function activate_wwd_mailer() {
  * This action is documented in includes/class-wwd-mailer-deactivator.php
  */
 function deactivate_wwd_mailer() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wwd-mailer-deactivator.php';
-	Wwd_Mailer_Deactivator::deactivate();
+	Wwd\Mailer\Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_wwd_mailer' );
 register_deactivation_hook( __FILE__, 'deactivate_wwd_mailer' );
 
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wwd-mailer.php';
+
 
 /**
  * Begins execution of the plugin.
@@ -68,7 +57,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wwd-mailer.php';
  */
 function run_wwd_mailer() {
 
-	$plugin = new Wwd_Mailer();
+	$plugin = new Wwd\Mailer\Mailer;
 	$plugin->run();
 
 }
