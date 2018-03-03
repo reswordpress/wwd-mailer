@@ -20,7 +20,7 @@
 
 	    function send_mail_batch() {
 
-	      data = {};
+	      var data = {};
 	  
 	      data = $("#wwd-mailer-form").serialize();
 
