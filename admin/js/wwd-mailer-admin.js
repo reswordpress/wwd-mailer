@@ -21,7 +21,7 @@
 	    function send_mail_batch() {
 
 	      var data = {};
-	  
+	      
 	      data = $("#wwd-mailer-form").serialize();
 
 	      data = data + '&count='+_count;
