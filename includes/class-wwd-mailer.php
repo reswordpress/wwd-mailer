@@ -69,7 +69,7 @@ class Wwd_Mailer {
 	public function __construct() {
 
 		$this->wwd_mailer = 'wwd-mailer';
-		$this->version = '1.0.0';
+		$this->version = '1.0.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
